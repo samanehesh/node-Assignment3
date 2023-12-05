@@ -5,6 +5,7 @@ const path = require('path');
 const indexRouter = require('./routers/indexRouter');
 const productRouter = require('./routers/productRouter');
 const clientRouter = require('./routers/clientRouter');
+const invoiceRouter = require('./routers/invoiceRouter');
 const logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 const { mongoose } = require('mongoose');
@@ -43,6 +44,7 @@ app.set('layout', './layouts/full-width');
 app.use('/', indexRouter);
 app.use('/products', productRouter);
 app.use('/clients', clientRouter);
+app.use('/invoices', invoiceRouter);
 
 //the catch all error page
 app.all('/*', (req, res) => {

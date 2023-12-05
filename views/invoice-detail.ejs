@@ -1,0 +1,13 @@
+<a href="/invoices">Return to Invoices</a>
+
+<h2><%=invoice.name%></h2>
+<div>Invoice ID: <%=invoice._id%></div>
+<div>Code: <%=invoice.code%></div>
+<div>Company: <%=invoice.company%></div>
+<div>email: <%=invoice.email%></div>
+
+
+<button class="btn btn-success" onClick="window.location.href='/invoices/edit/<%=invoice._id%>'">
+    Edit
+</button>
+

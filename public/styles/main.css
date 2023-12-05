@@ -93,6 +93,30 @@ footer {
   font-size: 20px;
 }
 
+
+/* Client Page Stylings */
+#invoice-list {
+  list-style-type: none;
+  padding: 20px 0px;
+  margin: auto;
+}
+
+#invoice-list > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+}
+
+#invoice-list > li > a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
+
 #submitButton {
 
   margin-top: 10px; 
