@@ -142,10 +142,11 @@ exports.Detail = async function (request, response) {
   let invoice = await _invoiceOps.getInvoiceById(invoiceId)
   let invoices = await _invoiceOps.getAllInvoices();
   if (invoice) {
-    response.render('invoice-detail', {
+    response.render('invoice-print', {
       title: 'Invoices',
       invoice: invoice,
-      invoiceId: request.params.id
+      invoiceId: request.params.id,
+      // layout: "./layouts/noheader"
     });
   } else {
     response.render('invoice-index', {
