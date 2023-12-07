@@ -51,19 +51,21 @@ exports.Create = async function (request, response) {
 // Handle profile form Post request
 exports.CreateInvoice = async function (request, response) {
   let products = await _productOps.getAllProducts();
+  const pIds = request.body.productId;
+  const qtys = request.body.qty;  
 
+  // const pIds = request.body['productId[]'];
+  // const qtys = request.body['qty[]'];
+  // const count = pIds.length;
   let pArray = [];
   let qArray = [];
-  for (let i=1; i<=2 ; i++){
-    var pname = 'product_'+i;
-    var qname = 'qty_'+i;
-    const productId = request.body[pname];
-    const qty = request.body[qname];
-    let product = await _productOps.getProductById(productId);
+  for (let i=1; i<2 ; i++){
+   
+    // const qty = request.body[qname];
+    let product = await _productOps.getProductById(pIds);
   
     pArray.push(product);
-    qArray.push(qty);
-console.log(pArray)
+    qArray.push(qtys);
   }
 
   let total =0;
