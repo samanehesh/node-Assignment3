@@ -44,7 +44,7 @@ class ClientOps {
   async createClient(clientObj) {
     try { 
       const error = await clientObj.validateSync();
-      if (error=="") {
+      if (error) {
         const response = {
           obj: clientObj,
           errorMsg: error.message,
