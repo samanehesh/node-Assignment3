@@ -1,42 +1,74 @@
 <a href="/invoices">Return to Invoices</a>
 <h3><%= invoice_id ? "Edit" : "New" %> Invoice</h3>
 
-<form action="/invoices/edit/<%=invoice_id?invoice_id:''%>" method="POST">
+<form id = "invoiceForm" action="/invoices/edit/<%=invoice_id?invoice_id:''%>" method="POST">
+
   <input
     type="hidden"
     id="invoice_id"
     name="invoice_id"
     value="<%= invoice_id%>"
   />
+
   <div>
-    <label for="name">Name:</label>
+    <label for="Clients">Clients:</label>
     <div>
-      <input id="name" name="name" type="text"
-      value="<%=invoice.name?invoice.name:''%>"
+      <select name = "client" >
+        <option value ="">Select Client</option>
+        <% for(let i=0; i< clients.length ; i++){%>
+        <option value = "<%= clients[i]._id%>">
+          <%=clients[i].name%>
+        </option>
+        <%}%>
+      </select>
     </div>
   </div>
 
   <div>
-    <label for="code">Code: </label>
+    <label for="name">Invoice Number:</label>
     <div>
-      <input id="code" name="code" type="text"
-      value="<%=invoice.code?invoice.code:''%>"
-    </div>
-  </div>
-  <div>
-    <label for="company">Company: </label>
-    <div>
-      <input id="company" name="company" type="text"
-      value="<%=invoice.company?invoice.company:''%>"
+      <input id="invoiceNumber" name="invoiceNumber" type="number"
+      value="<%=invoice.invoiceNumber?invoice.invoiceNumber:''%>">
     </div>
   </div>
 
   <div>
-    <label id="email" for="email">Email:</label>
+    <label for="issueDate">Issue Date: </label>
     <div>
-      <input id="email" name="email" type="text"
-      value="<%=invoice.email?invoice.email:''%>"
+      <input id="issueDate" name="issueDate" type="date"
+      value="<%=invoice.issueDate?invoice.issueDate:''%>">
     </div>
+  </div>
+
+  <div>
+    <label for="dueDate">Due Date: </label>
+    <div>
+      <input id="dueDate" name="dueDate" type="date"
+      value="<%=invoice.dueDate?invoice.dueDate:''%>">
+    </div>
+  </div>
+
+  <div>
+    <label for="product">Products:</label>
+    <div>
+      <select name = "product_1" >
+        <option value ="">Select Product</option>
+        <% for(let i=0; i< products.length ; i++){%>
+        <option value = "<%= products[i]._id%>">
+          <%=products[i].name%>
+        </option>
+        <%}%>
+      </select>
+      <label for="qty">Quantity:</label>
+      <input id="qty" name="qty_1" type="number">
+    </div>
+  </div>
+
+  <div>
+    <a class="btn btn btn-primary" id ="addingProduct"  >Add Product</a>
+    <!-- <a  class="btn btn btn-primary" >Add Product</a> -->
+    <!-- <a >Add Product</a> -->
+    <!-- href="<%= addProduct()%>" -->
   </div>
 
   <div>
@@ -51,3 +83,61 @@
   </div>
 </form>
 <p class="error-message"><%= errorMessage %></p>
+
+<script>
+  let productCount = 1;
+    document.getElementById('addingProduct').addEventListener('click', function() {
+      productCount++
+      var addProductElement = addProduct(productCount);
+      var formElement = document.getElementById('invoiceForm');
+      var lastChild = formElement.lastElementChild;
+      var secondToLastChild = lastChild.previousElementSibling;
+      formElement.insertBefore(addProductElement, secondToLastChild);
+  });
+  
+  function addProduct(i) {
+    var productDiv = document.createElement('div');
+    var product = 'product_' + i; 
+    var qty = 'qty_' + i; 
+    productDiv.innerHTML = `
+      <label for="product">Products:</label>
+      <div>
+        <select name="${product}">
+          <option value="">Select Product</option>
+          <% for (let i = 0; i < products.length; i++) { %>
+            <option value="<%= products[i]._id %>">
+              <%= products[i].name %>
+            </option>
+          <% } %>
+        </select>
+        <label for="qty">Quantity:</label>
+        <input id="qty" name="${qty}" type="number">
+      </div>
+    `;
+    return productDiv;
+  }
+</script>
+
+  <!-- <%
+  function addProduct() {
+%>
+  <div>
+    <label for="product">Products:</label>
+    <div>
+      <select name="product">
+        <option value="">Select Product</option>
+        <% for (let i = 0; i < products.length; i++) { %>
+          <option value="<%= products[i]._id %>">
+            <%= products[i].name %>
+          </option>
+        <% } %>
+      </select>
+      <label for="qty">Quantity:</label>
+      <input id="qty" name="qty" type="number">
+    </div>
+  </div>
+<%
+  }
+%> -->
+
+

@@ -1,65 +1,70 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samaneh Heshmatzadeh - A04</title>
-    <link rel="stylesheet" href="./styles/style.css">
-</head> -->
-
+<a id ="returnToInvoice" href="/invoices">Return to Invoices</a>
 <div id = "wrapper">
     <header>
         <div id = "logo-img"><img src="/images/logo.jpg" alt="Logo" width="100" height="100"></div>
         <div id = "company-info">
-            company co <br>
-            comany address <br>
-            suit <br>
-            city <br>
-            postal <br>
-            email <br>
+            SamAyesh Co<br>
+            123 test street <br>
+            Vancouver, BC <br>
+            A1A 2B2 <br>
+            test@gmail.com <br>
         </div>
-        <div id = "invoice-number">Invoice 0001</div>
+        <div id = "invoice-number">Invoice # <%=invoice.invoiceNumber %></div>
     </header>
     <main id = "main-wrapper">
         <section id = "summary-section">
             <div id ="client-contact">
-                BILL TO: <br>
-                Client Name <br>
-                Client Company Name <br>
-                comany address <br>
-                suit <br>
-                city <br>
-                postal <br>
-                email <br>
+                <b>BILL TO:</b><br>
+                <%= clientA.name%><br>
+                <%= clientA.company%> <br>
+                <%= clientA.email%> <br>
             </div>
             <div id = "bill-detail">
-                <div id = "issue-date">Date <br>2023/11/11</div>
-                <div id = "payable">Please Pay <br>CAD 9100.00</div>
-                <div id = "due-date">Due Date <br>2023/11/11</div>
+                <div id = "issue-date"><b>Date</b> <br><%=formatDate(invoice.issueDate) %></div>
+                <div id = "payable"><b>Please Pay</b> <br>$ <%= total%></div>
+                <div id = "due-date"><b>Due Date</b> <br><%=formatDate(invoice.dueDate) %></div>
             </div>
         </section>
 
         <section id = "billable-details-section">
-            <div id = "item"> ITEM <br> Cat 1 : Product 1 <br>Cat 2 : Product 2</div>
-            <div id = "qty"> QTY <br> 1 <br>10</div>
-            <div id = "rate">RATE <br> 100.00 <br> 900.00</div>
-            <div id = "amount">AMOUNT <br> 100.00 <br>9000.00</div>
+           
+            <section id = "details-name">
+                <div><b>Products</b></div>
+                <div><b>QTY</b></div>
+                <div><b>RATE</b></div>
+                <div><b>AMOUNT</b></div>
+            </section>
+            
+            <% for(let i =0; i < productArray.length; i++) { %>
+            <section class = "details">
+                <div><%=productArray[i].name%></div>
+                <div><%=qtyArray[i]%></div>
+                <div>$ <%=productArray[i].unit_cost%></div>
+                <div>$ <%=productArray[i].unit_cost*qtyArray[i]%></div>
+            </section>
+            <%}%>
 
 
 
         </section>
 
         <section id = "payment-summary-section">
-            <div id = "payment-instruction">Please remit payment via Interac E-Transfer to <br>owner@gmail.com</div>
-            <div id = "total-due">Total Due <br> CAD 9100.00</div>
+            <div id = "payment-instruction">Please remit payment via Interac E-Transfer to <br>test@gmail.com</div>
+            <div id = "total-due"><b>Total Due</b> <br>$ <%= total%></div>
         </section>
 
 
     </main>
-    <!-- <footer>© 2023-Samaneh Heshmatzadeh</footer> -->
-
-
-
-    <!-- <script src="./scripts/script.js"></script> -->
 </div>
-</html>
+
+
+<%
+  function formatDate(date) {
+    if (!date) return ''; // Handle cases where date is not provided
+
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const formattedDate = new Date(date).toLocaleDateString('en-US', options);
+
+    return formattedDate;
+  }
+%>
