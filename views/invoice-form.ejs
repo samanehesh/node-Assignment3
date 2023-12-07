@@ -51,7 +51,7 @@
   <div>
     <label for="productId">Products:</label>
     <div>
-      <select name = "productId" >
+      <select name = "productId[]" >
         <option value ="">Select Product</option>
         <% for(let i=0; i< products.length ; i++){%>
         <option value = "<%= products[i]._id%>">
@@ -60,7 +60,7 @@
         <%}%>
       </select>
       <label for="qty">Quantity:</label>
-      <input id="qty" name="qty" type="number">
+      <input id="qty" name="qty[]" type="number">
     </div>
   </div>
 
