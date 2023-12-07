@@ -131,6 +131,7 @@ footer {
 /* invoice print */
 /* body */
 #wrapper {
+  margin: 0 auto;
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 700px 1fr;
@@ -180,26 +181,48 @@ header > div:nth-of-type(3){
 
 /* billable detail section*/
 #billable-details-section{
-  display :grid;
-  grid-template-columns: 5fr 2fr 2fr 2fr;
+  display :flex;
+  flex-direction: column;
 }
-#billable-details-section div:nth-of-type(2){
-  text-align: center;
+
+#details-name{
+  /* display: flex;
+  flex-direction: row; */
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;  
 }
-#billable-details-section div:nth-of-type(3){
-  text-align: center;
-}
-#billable-details-section div:nth-of-type(4){
+#details-name div:nth-of-type(2){
+  text-align:center;
+} 
+#details-name div:nth-of-type(3){
+  text-align:center;
+} 
+#details-name div:nth-of-type(4){
   text-align:right;
 }
+.details{
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr; 
+}
+.details div:nth-of-type(2){
+  text-align:center;
+} 
+.details div:nth-of-type(3){
+  text-align:center;
+} 
+.details div:nth-of-type(4){
+  text-align:right;
+}
+
+
 
 /* payment summary section */
 #payment-summary-section{
   display: grid;
-  grid-template-columns: 6fr 1fr;
+  grid-template-columns: 5fr 1fr;
 }
 #payment-summary-section>div:nth-of-type(2){
-  padding-left: 10px;
+  text-align: right;
 }
 
 /* footer */
@@ -207,6 +230,25 @@ header > div:nth-of-type(3){
   grid-column-start: 2;
   grid-row-start: 3;
   text-align: right;
+}
+
+/* #total-due{
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items:flex-end;
+} */
+
+#returnToInvoice {
+  margin-left: 250px;
+}
+
+@media print {
+  /* Select the header or any other elements you want to hide */
+  header,#returnToInvoice {
+    display: none;
+  }
+  
 }
 
 /* #cancelButton{

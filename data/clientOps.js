@@ -1,4 +1,4 @@
-const Client = require("../models/Client.js");
+const {Client} = require("../models/Client.js");
 
 class ClientOps {
   ClientOps() {}
@@ -44,7 +44,7 @@ class ClientOps {
   async createClient(clientObj) {
     try { 
       const error = await clientObj.validateSync();
-      if (error=="") {
+      if (error) {
         const response = {
           obj: clientObj,
           errorMsg: error.message,

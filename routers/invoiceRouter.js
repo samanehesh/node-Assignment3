@@ -10,7 +10,7 @@ invoiceRouter.get('/:id', invoiceController.Detail);
 
 invoiceRouter.get('/:id/delete', invoiceController.DeleteInvoiceById);
 
-invoiceRouter.get('/edit/:id', invoiceController.Edit);
-invoiceRouter.post('/edit/:id', invoiceController.EditInvoice);
+// invoiceRouter.get('/edit/:id', invoiceController.Edit);
+// invoiceRouter.post('/edit/:id', invoiceController.EditInvoice);
 
 module.exports = invoiceRouter;

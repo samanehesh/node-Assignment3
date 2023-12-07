@@ -1,17 +1,17 @@
-const ClientOps = require('../data/ClientOps');
-const Client = require('../models/Client');
+const ClientOps = require('../data/clientOps');
+const {Client} = require('../models/Client');
 
 const _clientOps = new ClientOps();
 
-exports.Index = async function (req, res) {
-  let clients = await _clientOps.getAllClients();
-  res.render('client-index', {
-    title: 'Clients',
-    clients,
-    filterText: '',
-    errorMessage: ''
-  });
-};
+// exports.Index = async function (req, res) {
+//   let clients = await _clientOps.getAllClients();
+//   res.render('client-index', {
+//     title: 'Clients',
+//     clients,
+//     filterText: '',
+//     errorMessage: ''
+//   });
+// };
 
 exports.Index = async function (req, res) {
   const filterText = req.query.filterText ?? '';

@@ -4,42 +4,42 @@ class InvoiceOps {
   InvoiceOps() {}
 
   async getAllInvoices() {
-    const invoices = await Invoice.find({}).sort({ name: 1 });
+    const invoices = await Invoice.find({}).sort({ invoiceNumber: 1 });
     return invoices;
   }
 
-  async updateInvoiceById(id, name, code,company,email) {
-    const invoiceObj = await Invoice.findById(id);
+  // async updateInvoiceById(id, name, code,company,email) {
+  //   const invoiceObj = await Invoice.findById(id);
     
-    invoiceObj.name = name;
-    invoiceObj.code = code;
-    invoiceObj.company = company;
-    invoiceObj.email = email;
-    try {
-      const error = await invoiceObj.validateSync();
-      if (error) {
-        const response = {
-          obj: invoiceObj,
-          errorMsg: error.message,
-        };
-        return response; 
-      }
+  //   invoiceObj.name = name;
+  //   invoiceObj.code = code;
+  //   invoiceObj.company = company;
+  //   invoiceObj.email = email;
+  //   try {
+  //     const error = await invoiceObj.validateSync();
+  //     if (error) {
+  //       const response = {
+  //         obj: invoiceObj,
+  //         errorMsg: error.message,
+  //       };
+  //       return response; 
+  //     }
 
-      // Model is valid, so save it
-      const result = await invoiceObj.save();
-      const response = {
-        obj: result,
-        errorMsg: "",
-      };
-      return response;
-    } catch (error) {
-      const response = {
-        obj: invoiceObj,
-        errorMsg: error.message,
-      };
-      return response;
-    }
-  }
+  //     // Model is valid, so save it
+  //     const result = await invoiceObj.save();
+  //     const response = {
+  //       obj: result,
+  //       errorMsg: "",
+  //     };
+  //     return response;
+  //   } catch (error) {
+  //     const response = {
+  //       obj: invoiceObj,
+  //       errorMsg: error.message,
+  //     };
+  //     return response;
+  //   }
+  // }
 
   async createInvoice(invoiceObj) {
     try { 
@@ -79,7 +79,7 @@ class InvoiceOps {
 
   async getFilteredInvoices(filterText) {
     let result = await Invoice.find({
-      name: { $regex: `.*${filterText}.*`, $options: 'i' }
+      invoiceNumber: { $regex: `.*${filterText}.*`, $options: 'i' }
     });
     return result;
   }

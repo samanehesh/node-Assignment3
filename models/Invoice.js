@@ -1,14 +1,32 @@
 const mongoose = require("mongoose");
+const {productSchema} = require('./Product');
+const {clientSchema} = require('./Client');
 
 const invoiceSchema = mongoose.Schema(
   {
-    name: { type: String, required: true },
-    code: { type: String, required: true },
-    company : { type: String, required: true },
-    email : {type: String, required: true}
+    invoiceNumber: { type: Number, required: true,unique: true,validate: {
+      validator: (value) => value > 0, // Ensure positive number
+      message: "Invoice number must be a positive number.",
+    },},
+    issueDate :{type: Date, required: true},
+    dueDate: { type: Date, required: true },
+    qty: { type: Array, required: true },
+    total : {type : Number},
+
+    // client: { type: clientSchema, required: true },
+    // products : {type: [productSchema], required: true}
+
   },
   { collection: "invoices" }
 );
+
+invoiceSchema.add({
+  client: clientSchema
+});
+
+invoiceSchema.add({
+  products: [productSchema],
+});
 
 const Invoice = mongoose.model("Invoice", invoiceSchema);
 
