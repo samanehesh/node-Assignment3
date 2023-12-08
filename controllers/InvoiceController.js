@@ -7,15 +7,15 @@ const _clientOps = new ClientOps();
 const _invoiceOps = new InvoiceOps();
 const _productOps = new ProductOps();
 
-exports.Index = async function (req, res) {
-  let invoices = await _invoiceOps.getAllInvoices();
-  res.render('invoice-index', {
-    title: 'Invoices',
-    invoices,
-    filterText: '',
-    errorMessage: ''
-  });
-};
+// exports.Index = async function (req, res) {
+//   let invoices = await _invoiceOps.getAllInvoices();
+//   res.render('invoice-index', {
+//     title: 'Invoices',
+//     invoices,
+//     filterText: '',
+//     errorMessage: ''
+//   });
+// };
 
 exports.Index = async function (req, res) {
   const filterText = req.query.filterText ?? '';
@@ -54,24 +54,26 @@ exports.CreateInvoice = async function (request, response) {
   const pIds = request.body.productId;
   const qtys = request.body.qty;  
 
-  // const pIds = request.body['productId[]'];
-  // const qtys = request.body['qty[]'];
   const count = pIds.length;
   let pArray = [];
   let qArray = [];
+
   for (let i=0; i<count ; i++){
-   
-    // const qty = request.body[qname];
+   if (pIds[i] && qtys[i]){
     let product = await _productOps.getProductById(pIds[i]);
-  
     pArray.push(product);
     qArray.push(qtys[i]);
+   }
+   else{
+    pArray = null
+    qArray = null
+   }
   }
-
+  
   let total =0;
 
-  for (let i = 0; i< pArray.length; i++){
-    if(pArray[i] && qArray[i]){
+  for (let i = 0; i< pIds.length; i++){
+    if(pArray && qArray && pArray[i] && qArray[i]){
       total = total + pArray[i].unit_cost*qArray[i]
     }
   }
@@ -79,7 +81,7 @@ exports.CreateInvoice = async function (request, response) {
   const clientId = request.body.client;
   let client = await _clientOps.getClientById(clientId);
   let clients = await _clientOps.getAllClients();
-
+  
   let tempInvoiceObj = new Invoice({
     invoiceNumber: request.body.invoiceNumber,
     issueDate: request.body.issueDate,

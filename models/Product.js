@@ -4,8 +4,11 @@ const productSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     code: { type: String },
-    unit_cost: { type: Number, required: true }
-  },
+    unit_cost: { type: Number, required: true ,validate: {
+      validator: (value) => value > 0, // Ensure positive number
+      message: "Invoice number must be a positive number."}
+    },},
+
   { collection: 'products' }
 );
 
