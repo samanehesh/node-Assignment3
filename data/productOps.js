@@ -9,6 +9,9 @@ class ProductOps {
   }
 
   async getProductById(id) {
+    if (!id || id === undefined || id == ""){
+      return 
+    }
     const product = await Product.findById(id);
     return product;
   }

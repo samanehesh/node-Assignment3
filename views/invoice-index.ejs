@@ -1,14 +1,14 @@
 <h1>Invoices</h1>
 <p class="error-message"><%= errorMessage %></p>
 <form id="index-filter-form" action="/invoices" method="GET">
-  <label for="filterText">Filter Text:</label>
+  <label for="filterText">Invoice Number:</label>
   <input
     id="filter-text"
     name="filterText"
     type="text"
     value="<%=filterText?? '' %>"
   />
-  <button class="btn btn-success" type="submit" value="Submit">Filter</button>
+  <button class="btn btn-success" type="submit" value="Submit">Search</button>
 </form>
 <button class="btn btn-primary" onClick="window.location.href='/invoices/edit'">
   Create Invoices

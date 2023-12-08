@@ -73,6 +73,9 @@ class ClientOps {
   }
 
   async getClientById(id) {
+    if (!id || id === undefined || id == ""){
+      return 
+    }
     let client = await Client.findById(id);
     return client;
   }

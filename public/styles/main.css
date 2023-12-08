@@ -248,6 +248,9 @@ header > div:nth-of-type(3){
   header,#returnToInvoice {
     display: none;
   }
+  /* body{
+    margin-right: 50px;
+  } */
   
 }
 

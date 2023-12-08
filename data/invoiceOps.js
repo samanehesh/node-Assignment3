@@ -1,4 +1,4 @@
-const Invoice = require("../models/Invoice");
+const Invoice = require("../models/Invoice.js");
 
 class InvoiceOps {
   InvoiceOps() {}
@@ -77,12 +77,27 @@ class InvoiceOps {
     return invoice;
   }
 
-  async getFilteredInvoices(filterText) {
-    let result = await Invoice.find({
-      invoiceNumber: { $regex: `.*${filterText}.*`, $options: 'i' }
+//   async getFilteredInvoices(filterText) {
+//     let result = await Invoice.find({
+//       invoiceNumber: { $regex: `.*${filterText}.*`, $options: 'i' }
+//     });
+//     return result;
+//   }
+
+async getFilteredInvoices(filterText) {
+  const filterNumber = parseFloat(filterText);
+
+  if (!isNaN(filterNumber)) {
+    const result = await Invoice.find({
+      invoiceNumber: filterNumber
     });
+
     return result;
+  } else {
+    console.error('Invalid filterText: Not a number');
+    return []; 
   }
+}
 
 
 }
