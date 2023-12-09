@@ -57,25 +57,18 @@ exports.CreateInvoice = async function (request, response) {
   const count = pIds.length;
   let pArray = [];
   let qArray = [];
-
+  let total =0;
   for (let i=0; i<count ; i++){
    if (pIds[i] && qtys[i]){
     let product = await _productOps.getProductById(pIds[i]);
     pArray.push(product);
     qArray.push(qtys[i]);
-   }
-   else{
-    pArray = null
-    qArray = null
+    total = total + product.unit_cost*qtys[i]
    }
   }
-  
-  let total =0;
-
-  for (let i = 0; i< pIds.length; i++){
-    if(pArray && qArray && pArray[i] && qArray[i]){
-      total = total + pArray[i].unit_cost*qArray[i]
-    }
+  if (pArray.length === 0 ){
+    pArray = null;
+    qArray = null;
   }
 
   const clientId = request.body.client;
