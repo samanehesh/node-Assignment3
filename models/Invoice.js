@@ -19,10 +19,14 @@ const invoiceSchema = mongoose.Schema(
         message: "Due date must be greater than issue date.",
       },
     },
-    qty: { type: Array, required: true },
+    qty: { type: Array, required: true,validate: {
+      validator: (value) => value >= 0, // Ensure positive number
+      message: "quantity number must be a positive number."} 
+    },
+
     total : {type : Number},
 
-    client: { type: clientSchema, required: true, allowNull: false },
+    client: { type: clientSchema, required: true },
     products : {type: [productSchema], required: true}
 
   },
