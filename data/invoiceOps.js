@@ -8,39 +8,6 @@ class InvoiceOps {
     return invoices;
   }
 
-  // async updateInvoiceById(id, name, code,company,email) {
-  //   const invoiceObj = await Invoice.findById(id);
-    
-  //   invoiceObj.name = name;
-  //   invoiceObj.code = code;
-  //   invoiceObj.company = company;
-  //   invoiceObj.email = email;
-  //   try {
-  //     const error = await invoiceObj.validateSync();
-  //     if (error) {
-  //       const response = {
-  //         obj: invoiceObj,
-  //         errorMsg: error.message,
-  //       };
-  //       return response; 
-  //     }
-
-  //     // Model is valid, so save it
-  //     const result = await invoiceObj.save();
-  //     const response = {
-  //       obj: result,
-  //       errorMsg: "",
-  //     };
-  //     return response;
-  //   } catch (error) {
-  //     const response = {
-  //       obj: invoiceObj,
-  //       errorMsg: error.message,
-  //     };
-  //     return response;
-  //   }
-  // }
-
   async createInvoice(invoiceObj) {
     try { 
       const error = await invoiceObj.validateSync();

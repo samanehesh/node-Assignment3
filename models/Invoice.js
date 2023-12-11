@@ -20,9 +20,10 @@ const invoiceSchema = mongoose.Schema(
       },
     },
     qty: { type: Array, required: true },
+
     total : {type : Number},
 
-    client: { type: clientSchema, required: true, allowNull: false },
+    client: { type: clientSchema, required: true},
     products : {type: [productSchema], required: true}
 
   },
