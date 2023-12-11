@@ -59,7 +59,7 @@ exports.CreateInvoice = async function (request, response) {
   let qArray = [];
   let total =0;
   for (let i=0; i<count ; i++){
-   if (pIds[i] && qtys[i]){
+   if (pIds[i] && qtys[i] && qtys[i]>0){
     let product = await _productOps.getProductById(pIds[i]);
     pArray.push(product);
     qArray.push(qtys[i]);
@@ -74,7 +74,6 @@ exports.CreateInvoice = async function (request, response) {
   const clientId = request.body.client;
   let client = await _clientOps.getClientById(clientId);
   let clients = await _clientOps.getAllClients();
-  
   let tempInvoiceObj = new Invoice({
     invoiceNumber: request.body.invoiceNumber,
     issueDate: request.body.issueDate,
@@ -84,6 +83,7 @@ exports.CreateInvoice = async function (request, response) {
     qty : qArray,
     total : total
   });
+
 
   let responseObj = await _invoiceOps.createInvoice(tempInvoiceObj);
   if (responseObj.errorMsg == '') {
