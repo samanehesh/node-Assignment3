@@ -1,5 +1,5 @@
 {
-  "name": "A02-Express-Billing",
+  "name": "A3-invoice",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,8 +8,8 @@
     "dev": "nodemon app"
   },
   "keywords": [],
-  "author": "Alex F, Ayesha, Eunice,Samneh",
-  "collaborator": "Alex F, Ayesha, Eunice,Samneh",
+  "author": "Ayesha, Samaneh",
+  "collaborator": "Ayesha, Samaneh",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
